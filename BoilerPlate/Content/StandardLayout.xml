@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LayoutRoot xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <RootPanel Orientation="Horizontal">
+    <LayoutPanel Orientation="Horizontal" />
+    <LayoutAnchorablePane Id="12767a9a-dd8d-477c-a3de-926daa07c9d1">
+      <LayoutAnchorable IsVisible="True" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Example Window" IsSelected="True" ContentId="ExampleWindowViewModel" LastActivationTimeStamp="07/18/2017 18:27:49" />
+    </LayoutAnchorablePane>
+  </RootPanel>
+  <TopSide />
+  <RightSide />
+  <LeftSide />
+  <BottomSide />
+  <FloatingWindows />
+  <Hidden />
+</LayoutRoot>

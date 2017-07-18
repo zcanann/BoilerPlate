@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{018DABB6-53BC-4621-AAE6-B3021350D7EB}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>BoilerPlate</RootNamespace>
+    <AssemblyName>BoilerPlate</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>BoilerPlate.App</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Source\Controls\CenteredDialogBox.cs" />
+    <Compile Include="Source\Controls\ControlThreadingHelper.cs" />
+    <Compile Include="Source\Controls\DarkBrushes.cs" />
+    <Compile Include="Source\Controls\WinformsHostingHelper.cs" />
+    <Compile Include="Source\Docking\PanesStyleSelector.cs" />
+    <Compile Include="Source\Docking\PaneViewModel.cs" />
+    <Compile Include="Source\Docking\ToolViewModel.cs" />
+    <Compile Include="Source\ViewModels\ExampleWindowViewModel.cs" />
+    <Compile Include="Source\Main\MainViewModel.cs" />
+    <Compile Include="Source\Mvvm\Command\EventToCommand.cs" />
+    <Compile Include="Source\Mvvm\Command\IEventArgsConverter.cs" />
+    <Compile Include="Source\Mvvm\Command\RelayCommand.cs" />
+    <Compile Include="Source\Mvvm\Command\RelayCommandGeneric.cs" />
+    <Compile Include="Source\Mvvm\Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Source\Mvvm\Converters\IconConverter.cs" />
+    <Compile Include="Source\Mvvm\Helpers\Empty.cs" />
+    <Compile Include="Source\Mvvm\Helpers\IExecuteWithObject.cs" />
+    <Compile Include="Source\Mvvm\Helpers\IExecuteWithObjectAndResult.cs" />
+    <Compile Include="Source\Mvvm\Helpers\WeakAction.cs" />
+    <Compile Include="Source\Mvvm\Helpers\WeakActionGeneric.cs" />
+    <Compile Include="Source\Mvvm\Helpers\WeakFunc.cs" />
+    <Compile Include="Source\Mvvm\Helpers\WeakFuncGeneric.cs" />
+    <Compile Include="Source\Mvvm\ICleanup.cs" />
+    <Compile Include="Source\Mvvm\Messaging\DialogMessage.cs" />
+    <Compile Include="Source\Mvvm\Messaging\GenericMessage.cs" />
+    <Compile Include="Source\Mvvm\Messaging\IMessenger.cs" />
+    <Compile Include="Source\Mvvm\Messaging\MessageBase.cs" />
+    <Compile Include="Source\Mvvm\Messaging\Messenger.cs" />
+    <Compile Include="Source\Mvvm\Messaging\NotificationMessage.cs" />
+    <Compile Include="Source\Mvvm\Messaging\NotificationMessageAction.cs" />
+    <Compile Include="Source\Mvvm\Messaging\NotificationMessageActionGeneric.cs" />
+    <Compile Include="Source\Mvvm\Messaging\NotificationMessageGeneric.cs" />
+    <Compile Include="Source\Mvvm\Messaging\NotificationMessageWithCallback.cs" />
+    <Compile Include="Source\Mvvm\Messaging\PropertyChangedMessage.cs" />
+    <Compile Include="Source\Mvvm\Messaging\PropertyChangedMessageBase.cs" />
+    <Compile Include="Source\Mvvm\ObservableObject.cs" />
+    <Compile Include="Source\Mvvm\PrimitiveBinding.cs" />
+    <Compile Include="Source\Mvvm\Threading\DispatcherHelper.cs" />
+    <Compile Include="Source\Mvvm\ViewModelBase.cs" />
+    <Compile Include="Source\Mvvm\Views\IDialogService.cs" />
+    <Compile Include="Source\Mvvm\Views\INavigationService.cs" />
+    <Compile Include="Source\ViewModels\WinformsExampleWindowViewModel.cs" />
+    <Compile Include="View\WinformsExampleControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\WinformsExampleControl.Designer.cs">
+      <DependentUpon>WinformsExampleControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\WinformsExampleWindow.xaml.cs">
+      <DependentUpon>WinformsExampleWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ExampleWindow.xaml.cs">
+      <DependentUpon>ExampleWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ViewModelLocator.cs" />
+    <Compile Include="View\ViewTemplateSelector.cs" />
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="View\WinformsExampleWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ExampleWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Style\CheckBoxes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Style\DropDown.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Style\DarkBrushes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\WinformsExampleControl.resx">
+      <DependentUpon>WinformsExampleControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Source\Mvvm\Behavior\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Xceed.Wpf.AvalonDock\Xceed.Wpf.AvalonDock.csproj">
+      <Project>{60d1d960-8aae-4f87-8d85-0c2bdd6254b1}</Project>
+      <Name>Xceed.Wpf.AvalonDock</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Content\Minimize.png" />
+    <Resource Include="Content\Maximize.png" />
+    <Resource Include="Content\Close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Content\Icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\StandardLayout.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

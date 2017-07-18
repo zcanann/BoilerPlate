@@ -1,0 +1,226 @@
+﻿<shell:Window
+    x:Class="BoilerPlate.View.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:avalonDock="http://schemas.xceed.com/wpf/xaml/avalondock"
+    xmlns:converters="clr-namespace:BoilerPlate.Source.Mvvm.Converters"
+    xmlns:intr="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:local="clr-namespace:BoilerPlate.Source.Docking"
+    xmlns:shell="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:view="clr-namespace:BoilerPlate.View"
+    x:Name="BoilerPlateWindow"
+    Title="BoilerPlate"
+    Width="840"
+    Height="840"
+    x:ClassModifier="internal"
+    AllowsTransparency="False"
+    DataContext="{Binding MainViewModel, Source={StaticResource ViewModelLocator}}"
+    WindowStyle="None">
+
+    <shell:Window.Resources>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+    </shell:Window.Resources>
+
+    <shell:WindowChrome.WindowChrome>
+        <shell:WindowChrome CaptionHeight="{Binding ActualHeight, ElementName=titlebar}" />
+    </shell:WindowChrome.WindowChrome>
+
+    <intr:Interaction.Triggers>
+        <intr:EventTrigger EventName="Loaded">
+            <intr:InvokeCommandAction Command="{Binding LoadLayoutCommand}" CommandParameter="{Binding ., ElementName=dockManager}" />
+        </intr:EventTrigger>
+        <intr:EventTrigger EventName="ContentRendered">
+            <intr:InvokeCommandAction Command="{Binding DisplayChangeLogCommand}" />
+        </intr:EventTrigger>
+        <intr:EventTrigger EventName="Unloaded">
+            <intr:InvokeCommandAction Command="{Binding SaveLayoutCommand}" CommandParameter="{Binding ., ElementName=dockManager}" />
+        </intr:EventTrigger>
+    </intr:Interaction.Triggers>
+
+    <shell:Grid>
+
+        <shell:Grid.RowDefinitions>
+            <!--  Title Bar Row  -->
+            <shell:RowDefinition Height="Auto" />
+            <!--  Menu Bar Row  -->
+            <shell:RowDefinition Height="Auto" />
+            <!--  Docking Panel Row  -->
+            <shell:RowDefinition Height="*" />
+        </shell:Grid.RowDefinitions>
+
+        <!--  Title Bar  -->
+        <shell:Grid
+            x:Name="titlebar"
+            Grid.Row="0"
+            Background="{StaticResource AvalonDock_Expression_BaseColor4}">
+
+            <shell:Grid.ColumnDefinitions>
+                <!--  Title Text Column  -->
+                <shell:ColumnDefinition />
+                <!--  Buttons  -->
+                <shell:ColumnDefinition Width="Auto" />
+            </shell:Grid.ColumnDefinitions>
+
+            <shell:Grid Grid.Column="0">
+                <shell:Grid.ColumnDefinitions>
+                    <shell:ColumnDefinition Width="Auto" />
+                    <shell:ColumnDefinition Width="Auto" />
+                </shell:Grid.ColumnDefinitions>
+                <shell:Image
+                    Grid.Column="0"
+                    Width="24"
+                    Height="24"
+                    Margin="4"
+                    Source="pack://application:,,,/BoilerPlate;component/Content/Icon.ico" />
+                <shell:TextBlock
+                    Grid.Column="1"
+                    VerticalAlignment="Center"
+                    Foreground="{StaticResource AvalonDock_Expression_BaseColor7}"
+                    Text="BoilerPlate" />
+            </shell:Grid>
+
+            <shell:Menu
+                Grid.Column="1"
+                VerticalAlignment="Center"
+                Background="Transparent">
+                <shell:MenuItem
+                    Height="24"
+                    shell:WindowChrome.IsHitTestVisibleInChrome="True"
+                    Command="{Binding MinimizeCommand}"
+                    CommandParameter="{Binding ElementName=BoilerPlateWindow}"
+                    ToolTip="Minimize">
+                    <shell:MenuItem.Header>
+                        <shell:Image
+                            Width="16"
+                            Height="16"
+                            Source="pack://application:,,,/BoilerPlate;component/Content/Minimize.png" />
+                    </shell:MenuItem.Header>
+                </shell:MenuItem>
+                <shell:MenuItem
+                    Height="24"
+                    shell:WindowChrome.IsHitTestVisibleInChrome="True"
+                    Command="{Binding MaximizeRestoreCommand}"
+                    CommandParameter="{Binding ElementName=BoilerPlateWindow}"
+                    ToolTip="Maximize/Restore">
+                    <shell:MenuItem.Header>
+                        <shell:Image
+                            Width="16"
+                            Height="16"
+                            Source="pack://application:,,,/BoilerPlate;component/Content/Maximize.png" />
+                    </shell:MenuItem.Header>
+                </shell:MenuItem>
+                <shell:MenuItem
+                    Height="24"
+                    shell:WindowChrome.IsHitTestVisibleInChrome="True"
+                    Command="{Binding CloseCommand}"
+                    CommandParameter="{Binding ElementName=BoilerPlateWindow}"
+                    ToolTip="Close">
+                    <shell:MenuItem.Header>
+                        <shell:Image
+                            Width="16"
+                            Height="16"
+                            Source="pack://application:,,,/BoilerPlate;component/Content/Close.png" />
+                    </shell:MenuItem.Header>
+                </shell:MenuItem>
+            </shell:Menu>
+        </shell:Grid>
+
+        <!--  Menu Bar  -->
+        <shell:Grid Grid.Row="1">
+            <shell:Menu
+                Background="{StaticResource AvalonDock_Expression_BaseColor4}"
+                BorderBrush="{StaticResource AvalonDock_Expression_BaseColor2}"
+                Foreground="{StaticResource AvalonDock_Expression_BaseColor2}">
+                <shell:Menu.Resources>
+                    <shell:Style x:Key="menuItemStyle" TargetType="{x:Type MenuItem}">
+                        <shell:Setter Property="Foreground" Value="{StaticResource AvalonDock_Expression_BaseColor2}" />
+                        <shell:Setter Property="Background" Value="{StaticResource AvalonDock_Expression_BaseColor4}" />
+                        <shell:Setter Property="BorderBrush" Value="{StaticResource AvalonDock_Expression_BaseColor4}" />
+                        <shell:Setter Property="BorderThickness" Value="0" />
+                    </shell:Style>
+                </shell:Menu.Resources>
+                <!--  File Header  -->
+                <shell:MenuItem
+                    DataContext="{Binding Source={StaticResource ViewModelLocator}}"
+                    Header="File"
+                    Style="{StaticResource DropDown}">
+                    <shell:MenuItem
+                        Command="{Binding MainViewModel.CloseCommand}"
+                        CommandParameter="{Binding ElementName=BoilerPlateWindow}"
+                        Header="Exit"
+                        Style="{StaticResource menuItemStyle}" />
+                </shell:MenuItem>
+
+                <!--  View Header  -->
+                <shell:MenuItem
+                    DataContext="{Binding Source={StaticResource ViewModelLocator}}"
+                    Header="View"
+                    Style="{StaticResource DropDown}">
+                    <shell:MenuItem
+                        Header="Example Window"
+                        IsCheckable="True"
+                        IsChecked="{Binding ExampleWindowViewModel.IsVisible, Mode=TwoWay}"
+                        Style="{StaticResource menuItemStyle}" />
+                    <shell:MenuItem
+                        Header="Winforms Example Window"
+                        IsCheckable="True"
+                        IsChecked="{Binding WinformsExampleWindowViewModel.IsVisible, Mode=TwoWay}"
+                        Style="{StaticResource menuItemStyle}" />
+                </shell:MenuItem>
+            </shell:Menu>
+        </shell:Grid>
+
+        <!--  Docking Panel AnchorablesSource="{Binding Tools}"  -->
+        <avalonDock:DockingManager
+            x:Name="dockManager"
+            Grid.Row="2"
+            AnchorablesSource="{Binding Tools}"
+            Background="{StaticResource AvalonDock_Expression_BaseColor4}">
+            <!--  Theme  -->
+            <avalonDock:DockingManager.Theme>
+                <avalonDock:DarkTheme />
+            </avalonDock:DockingManager.Theme>
+
+            <!--  All Dockable Windows  -->
+            <avalonDock:DockingManager.LayoutItemTemplateSelector>
+                <view:ViewTemplateSelector>
+                    <!--  Example Window  -->
+                    <view:ViewTemplateSelector.ExampleWindowViewTemplate>
+                        <shell:DataTemplate>
+                            <view:ExampleWindow />
+                        </shell:DataTemplate>
+                    </view:ViewTemplateSelector.ExampleWindowViewTemplate>
+                    <!--  Winforms Example Window  -->
+                    <view:ViewTemplateSelector.WinformsExampleWindowViewTemplate>
+                        <shell:DataTemplate>
+                            <view:WinformsExampleWindow />
+                        </shell:DataTemplate>
+                    </view:ViewTemplateSelector.WinformsExampleWindowViewTemplate>
+                </view:ViewTemplateSelector>
+            </avalonDock:DockingManager.LayoutItemTemplateSelector>
+
+            <!--  Container Style  -->
+            <avalonDock:DockingManager.LayoutItemContainerStyleSelector>
+                <local:PanesStyleSelector>
+                    <!--  General Docking Tools Style  -->
+                    <local:PanesStyleSelector.ToolStyle>
+                        <shell:Style TargetType="{x:Type avalonDock:LayoutAnchorableItem}">
+                            <shell:Setter Property="Title" Value="{Binding Model.Title}" />
+                            <shell:Setter Property="IconSource" Value="{Binding Model.IconSource}" />
+                            <shell:Setter Property="Visibility" Value="{Binding Model.IsVisible, Mode=TwoWay, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Hidden}}" />
+                            <shell:Setter Property="ContentId" Value="{Binding Model.ContentId}" />
+                            <shell:Setter Property="IsSelected" Value="{Binding Model.IsSelected, Mode=TwoWay}" />
+                            <shell:Setter Property="IsActive" Value="{Binding Model.IsActive, Mode=TwoWay}" />
+                        </shell:Style>
+                    </local:PanesStyleSelector.ToolStyle>
+                </local:PanesStyleSelector>
+            </avalonDock:DockingManager.LayoutItemContainerStyleSelector>
+
+            <!--  Layout Style  -->
+            <avalonDock:LayoutRoot>
+                <!--  Docking Group for All Windows  -->
+                <avalonDock:LayoutPanel />
+            </avalonDock:LayoutRoot>
+        </avalonDock:DockingManager>
+    </shell:Grid>
+</shell:Window>
